@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -8,17 +9,18 @@ namespace ExampleCloudWithDocker.Blazor.Data
 {
     public class WeatherForecastService
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IConfiguration _configuration;
 
-        public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+        public WeatherForecastService(IConfiguration configuration)
         {
+            _configuration = configuration;
+        }
 
+        public async Task<WeatherForecast[]> GetForecastAsync()
+        {
             try
             {
-                var apiUrl = configuration.GetSection("ApiUrl").Value;
+                var apiUrl = _configuration.GetValue<string>("ApiUrl");
 
                 var client = new HttpClient();
                 client.BaseAddress = new Uri(apiUrl);
@@ -32,20 +34,12 @@ namespace ExampleCloudWithDocker.Blazor.Data
                     return JsonConvert.DeserializeObject<WeatherForecast[]>(content);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-
+                // ignore
             }
 
             return null;
-
-            //var rng = new Random();
-            //return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = startDate.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //}).ToArray());
         }
     }
 }
