@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   examplecloudwithdocker.blazor:
-    image: ${DOCKER_REGISTRY-}examplecloudwithdockerblazor
+    image: examplecloudwithdockerblazor
     build:
       context: .
       dockerfile: ExampleCloudWithDocker.Blazor/Dockerfile
@@ -13,8 +13,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
 
-   examplecloudwithdocker.api:
-    image: ${DOCKER_REGISTRY-}examplecloudwithdockerapi
+  examplecloudwithdocker.api:
+    image: examplecloudwithdockerapi
     build:
       context: .
       dockerfile: ExampleCloudWithDocker.Api/Dockerfile
