@@ -18,7 +18,7 @@ namespace ExampleCloudWithDocker.Blazor.Data
 
             try
             {
-                var apiUrl = "https://localhost:44381/"; //configuration.GetSection("ApiUrl").Value;
+                var apiUrl = configuration.GetSection("ApiUrl").Value;
 
                 var client = new HttpClient();
                 client.BaseAddress = new Uri(apiUrl);
