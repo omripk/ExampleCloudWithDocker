@@ -13,7 +13,7 @@ namespace ExampleCloudWithDocker.Api.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Ömer", "Fatih", "Yasinko", "Beyo", "Oryan"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
